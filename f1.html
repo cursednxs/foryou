@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For You 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blush: #f9c7d0;
+      --rose: #e8607a;
+      --deep: #b5304a;
+      --cream: #fff6f8;
+      --text: #3a1a22;
+      --soft: #f2dde2;
+    }
+
+    body {
+      font-family: 'Lora', serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── PAGE SYSTEM ── */
+    .page {
+      display: none;
+      min-height: 100vh;
+      animation: fadeIn 0.8s ease forwards;
+    }
+    .page.active { display: flex; flex-direction: column; align-items: center; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ───────────────────── PAGE 1 ───────────────────── */
+    #page1 {
+      background: linear-gradient(160deg, #fff0f3 0%, #ffe4ec 50%, #ffd6e3 100%);
+      justify-content: center;
+      padding: 40px 20px 60px;
+      position: relative;
+    }
+
+    /* floating petals bg */
+    #page1::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        radial-gradient(circle at 15% 20%, rgba(232,96,122,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 85% 75%, rgba(181,48,74,0.07) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .greeting-card {
+      max-width: 640px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* sparkle stars */
+    .stars { font-size: 1.4rem; letter-spacing: 6px; margin-bottom: 16px; opacity: 0.7; }
+
+    .greeting-card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 8vw, 4.2rem);
+      font-style: italic;
+      color: var(--deep);
+      line-height: 1.15;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 20px rgba(181,48,74,0.15);
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 40px;
+      opacity: 0.8;
+    }
+
+    .divider {
+      display: flex; align-items: center; gap: 14px;
+      margin: 0 auto 36px;
+      width: 80%;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--rose), transparent);
+    }
+    .divider span { color: var(--rose); font-size: 1.2rem; }
+
+    .para-box {
+      background: rgba(255,255,255,0.7);
+      border: 1.5px solid rgba(232,96,122,0.25);
+      border-radius: 20px;
+      padding: 36px 40px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 8px 40px rgba(181,48,74,0.08);
+      margin-bottom: 40px;
+      text-align: left;
+      line-height: 1.85;
+      font-size: 1.05rem;
+      color: #4a2030;
+    }
+
+    .para-box p { margin-bottom: 16px; }
+    .para-box p:last-child { margin-bottom: 0; }
+
+    /* ── TULIP SVG ── */
+    .tulip-wrap {
+      display: flex; justify-content: center;
+      margin: 4px 0 36px;
+      animation: float 3.5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    .tulip-wrap svg { width: 90px; height: 130px; filter: drop-shadow(0 6px 16px rgba(232,96,122,0.3)); }
+
+    /* ── NEXT BUTTON ── */
+    .btn-next {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--rose), var(--deep));
+      color: #fff;
+      border: none; border-radius: 50px;
+      padding: 15px 42px;
+      font-family: 'Lora', serif;
+      font-size: 1.05rem;
+      cursor: pointer;
+      box-shadow: 0 6px 28px rgba(181,48,74,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .btn-next:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 36px rgba(181,48,74,0.45);
+    }
+    .btn-next:active { transform: scale(0.97); }
+
+    /* ───────────────────── PAGE 2 ───────────────────── */
+    #page2 {
+      background: linear-gradient(160deg, #1a0a10 0%, #2d0f1c 40%, #1a0a10 100%);
+      padding: 60px 20px 80px;
+      gap: 0;
+    }
+
+    .p2-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .p2-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-style: italic;
+      color: var(--blush);
+      line-height: 1.2;
+    }
+    .p2-header .tagline {
+      margin-top: 10px;
+      color: rgba(249,199,208,0.55);
+      font-size: 0.88rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    /* photo grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto 72px;
+    }
+
+    .photo-card {
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(249,199,208,0.15);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      transition: transform 0.35s, box-shadow 0.35s;
+      animation: cardIn 0.6s ease both;
+    }
+    .photo-card:nth-child(1) { animation-delay: 0.1s; }
+    .photo-card:nth-child(2) { animation-delay: 0.25s; }
+    .photo-card:nth-child(3) { animation-delay: 0.4s; }
+    .photo-card:nth-child(4) { animation-delay: 0.55s; }
+    .photo-card:nth-child(5) { animation-delay: 0.7s; }
+    .photo-card:nth-child(6) { animation-delay: 0.85s; }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .photo-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    /* photo placeholder */
+    .photo-slot {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #3a1a26 0%, #5a2038 100%);
+      position: relative;
+    }
+
+    /* if using <img> tags, they get this class */
+    .photo-slot img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* placeholder styling when no real photo */
+    .photo-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #3a1a26 0%, #5a2038 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px;
+      color: rgba(249,199,208,0.4);
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      text-align: center;
+      padding: 20px;
+    }
+    .photo-placeholder .ph-icon { font-size: 2.5rem; opacity: 0.5; }
+
+    .card-caption {
+      padding: 18px 22px 20px;
+    }
+    .card-caption .quote {
+      font-style: italic;
+      color: var(--blush);
+      font-size: 0.97rem;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+    .card-caption .quote::before { content: '\201C'; }
+    .card-caption .quote::after  { content: '\201D'; }
+
+    /* ── FINAL MESSAGE ── */
+    .final-msg {
+      max-width: 680px;
+      text-align: center;
+      padding: 48px 40px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(249,199,208,0.18);
+      border-radius: 24px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .final-msg::before {
+      content: '🌷';
+      font-size: 2.4rem;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .final-msg p {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 3vw, 1.45rem);
+      line-height: 1.75;
+      color: rgba(249,199,208,0.9);
+      font-style: italic;
+    }
+
+    .final-msg .hindi {
+      margin-top: 20px;
+      font-family: 'Lora', serif;
+      font-size: clamp(1rem, 2.8vw, 1.25rem);
+      color: var(--rose);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    .heart-trail { display: block; margin-top: 24px; font-size: 1.4rem; letter-spacing: 8px; opacity: 0.6; }
+
+    /* scroll petal */
+    .petal-divider {
+      text-align: center; font-size: 1.6rem;
+      margin: 48px 0; opacity: 0.35;
+      letter-spacing: 10px;
+    }
+
+    /* ── TULIP BACK BUTTON ── */
+    .btn-back-tulip {
+      position: fixed;
+      top: 22px;
+      left: 22px;
+      z-index: 999;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      filter: drop-shadow(0 4px 12px rgba(232,96,122,0.45));
+      transition: transform 0.25s ease, filter 0.25s ease;
+      animation: tulipPop 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .btn-back-tulip:hover {
+      transform: scale(1.15) translateY(-3px);
+      filter: drop-shadow(0 8px 20px rgba(232,96,122,0.65));
+    }
+    .btn-back-tulip:active { transform: scale(0.93); }
+
+    @keyframes tulipPop {
+      from { opacity: 0; transform: scale(0.4) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .btn-back-tulip svg {
+      width: 52px;
+      height: 74px;
+      display: block;
+    }
+
+    .btn-back-label {
+      font-family: 'Lora', serif;
+      font-size: 0.65rem;
+      font-style: italic;
+      letter-spacing: 1px;
+      color: rgba(249,199,208,0.7);
+      margin-top: 4px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════ PAGE 1 ════════════════ -->
+<div id="page1" class="page active">
+  <div class="greeting-card">
+    <div class="stars">✦ ✦ ✦</div>
+
+    <h1>Hey, you 🌸</h1>
+    <p class="subtitle">A little something, just for you</p>
+
+    <div class="divider"><span>❀</span></div>
+
+    <div class="para-box">
+      <!--
+        ✏️  REPLACE THE TEXT BELOW WITH YOUR OWN PARAGRAPH(S)
+        You can add as many <p> tags as you like.
+      -->
+      <p>
+        tera birthday wish naa krne ka regret
+      </p>
+     
+    </div>
+
+    <!-- ── TULIP FLOWER ── -->
+    <div class="tulip-wrap">
+      <svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- stem -->
+        <path d="M45 128 C45 90 45 70 45 52" stroke="#4a7c50" stroke-width="3" stroke-linecap="round"/>
+        <!-- left leaf -->
+        <path d="M45 90 C30 80 18 68 22 55 C32 64 42 76 45 90Z" fill="#5a9c60"/>
+        <!-- right leaf -->
+        <path d="M45 78 C60 70 72 58 68 46 C57 54 48 66 45 78Z" fill="#4a8c50"/>
+        <!-- petal back-left -->
+        <path d="M32 52 C26 36 28 18 38 10 C40 26 38 42 45 52Z" fill="#d4506a"/>
+        <!-- petal back-right -->
+        <path d="M58 52 C64 36 62 18 52 10 C50 26 52 42 45 52Z" fill="#d4506a"/>
+        <!-- petal front-left -->
+        <path d="M28 54 C20 38 24 14 38 8  C42 26 40 44 45 54Z" fill="#e8607a"/>
+        <!-- petal front-right -->
+        <path d="M62 54 C70 38 66 14 52 8  C48 26 50 44 45 54Z" fill="#e8607a"/>
+        <!-- petal center -->
+        <path d="M45 54 C38 38 40 14 45 6 C50 14 52 38 45 54Z" fill="#f07090"/>
+        <!-- shine -->
+        <ellipse cx="40" cy="28" rx="3" ry="8" fill="rgba(255,255,255,0.25)" transform="rotate(-10 40 28)"/>
+      </svg>
+    </div>
+
+    <button class="btn-next" onclick="goToPage2()">
+      Next Page &nbsp;→
+    </button>
+  </div>
+</div>
+
+<!-- ── TULIP BACK BUTTON (fixed, top-left, visible on page 2) ── -->
+<button class="btn-back-tulip" id="btnBack" onclick="goToPage1()" title="Go back">
+  <svg viewBox="0 0 52 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- stem -->
+    <path d="M26 72 C26 52 26 40 26 30" stroke="#5aac64" stroke-width="2.2" stroke-linecap="round"/>
+    <!-- left leaf -->
+    <path d="M26 52 C17 46 10 38 13 30 C19 36 24 44 26 52Z" fill="#6abf70"/>
+    <!-- right leaf -->
+    <path d="M26 44 C35 39 42 32 39 24 C33 30 27 38 26 44Z" fill="#5aac64"/>
+    <!-- petal back-left -->
+    <path d="M18 30 C14 20 16 10 22 5 C23 15 22 24 26 30Z" fill="#c0405e"/>
+    <!-- petal back-right -->
+    <path d="M34 30 C38 20 36 10 30 5 C29 15 30 24 26 30Z" fill="#c0405e"/>
+    <!-- petal front-left -->
+    <path d="M15 31 C10 21 13 8 22 4 C24 15 23 25 26 31Z" fill="#e05878"/>
+    <!-- petal front-right -->
+    <path d="M37 31 C42 21 39 8 30 4 C28 15 29 25 26 31Z" fill="#e05878"/>
+    <!-- petal center -->
+    <path d="M26 31 C22 20 23 8 26 3 C29 8 30 20 26 31Z" fill="#f0708a"/>
+    <!-- shine -->
+    <ellipse cx="23" cy="15" rx="2" ry="5" fill="rgba(255,255,255,0.28)" transform="rotate(-10 23 15)"/>
+    <!-- back arrow on stem area -->
+    <path d="M20 62 L14 68 L20 74" stroke="rgba(249,199,208,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M14 68 L32 68" stroke="rgba(249,199,208,0.75)" stroke-width="2" stroke-linecap="round" fill="none"/>
+  </svg>
+  <span class="btn-back-label">back</span>
+</button>
+
+<!-- ════════════════ PAGE 2 ════════════════ -->
+<div id="page2" class="page">
+  <div class="p2-header">
+    <h2></h2>
+    <p class="tagline">next time kuch aacha try karenge</p>
+  </div>
+
+  <div class="photo-grid">
+
+    <!--
+      ✏️  HOW TO ADD YOUR PHOTOS:
+      Replace the <div class="photo-placeholder"> section inside each card
+      with an <img> tag pointing to your photo file, like this:
+      <img src="photo1.jpg" alt="photo" class="photo-slot" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;">
+
+      Also replace the quote text in each <p class="quote"> with YOUR quote.
+
+      Add or remove cards as needed by copy-pasting a whole <div class="photo-card">...</div> block.
+    -->
+
+
+    <!-- CARD 1 -->
+    <div class="photo-card">
+      <div class="photo-placeholder">
+        <span class="ph-icon">📸</span>
+        <span> abe yaha photo lagane wale the par integration nahi hua local host pe ho gya tha</span>
+      </div>
+      <div class="card-caption">
+        <p class="quote"></p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="petal-divider">🌷 🌷 🌷</div>
+
+  <!-- ── FINAL PARAGRAPH ── -->
+  <div class="final-msg">
+    <p>
+       pata h teko maine teko birthday wish nhi kiya
+      na isiliye meko itna din se bohot regret toh maine regret kam krne ke liye ky create kr diya 
+hehehehhe  (blushing emoji goes here)
+      <br><br>
+      But you know what? itna mehnat kr ke mera hi fyada hua hai  🌷
+    </p>
+    <p class="hindi">
+      Happy Birthday, ik late ho gya bohot late ho gya  💕
+    </p>
+    <span class="heart-trail">♡ ♡ ♡</span>
+  </div>
+</div>
+
+<script>
+  const btnBack = document.getElementById('btnBack');
+
+  function goToPage2() {
+    document.getElementById('page1').classList.remove('active');
+    const p2 = document.getElementById('page2');
+    p2.classList.add('active');
+    btnBack.style.display = 'flex';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goToPage1() {
+    document.getElementById('page2').classList.remove('active');
+    btnBack.style.display = 'none';
+    const p1 = document.getElementById('page1');
+    p1.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
